@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exera ROI Calculator</title>
+  <script>
+    function calculateROI() {
+      const employees = parseInt(document.getElementById("employees").value);
+      const avgSalary = parseInt(document.getElementById("avgSalary").value);
+      const attritionRate = parseFloat(document.getElementById("attritionRate").value) / 100;
+      const timeSaved = parseInt(document.getElementById("timeSaved").value);
+
+      // Calculate estimated savings
+      const turnoverCost = employees * attritionRate * avgSalary * 0.5; // Conservative est.
+      const productivityGain = timeSaved * 12 * 100; // $100/hr value, 12 months
+
+      const totalROI = turnoverCost + productivityGain;
+
+      document.getElementById("result").innerText =
+        "$" + totalROI.toLocaleString() + " estimated annual ROI using Exera.";
+    }
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      background: #f9f9f9;
+    }
+    h2 {
+      color: #007C91;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      background: #007C91;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h2>Exera ROI Calculator</h2>
+  <p>Estimate how much you could save or gain annually by using Exera to forecast risk, reduce attrition, and save reporting time.</p>
+
+  <label for="employees">Number of Employees</label>
+  <input type="number" id="employees" placeholder="e.g., 250" />
+
+  <label for="avgSalary">Average Salary per Employee ($)</label>
+  <input type="number" id="avgSalary" placeholder="e.g., 85000" />
+
+  <label for="attritionRate">Current Attrition Rate (%)</label>
+  <input type="number" id="attritionRate" placeholder="e.g., 18" />
+
+  <label for="timeSaved">Hours Saved per Month on Forecasting + Reporting</label>
+  <input type="number" id="timeSaved" placeholder="e.g., 20" />
+
+  <button onclick="calculateROI()">Calculate My ROI</button>
+  <div id="result"></div>
+</body>
+</html>
